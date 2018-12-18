@@ -1,0 +1,166 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-text-geometry-component/dist/aframe-text-geometry-component.min.js"></script>
+    <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+    <script src="assets/aframe-physics-system.min.js"></script>
+    <script src="assets/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-gltf-exporter-component/dist/aframe-gltf-exporter-component.min.js"></script>
+    <title>VRmart</title>
+</head>
+
+
+<body class="a-body ">
+    <a-scene id="VRmartScene" physics="debug: true; driver: local; iterations: 20;" gltf-exporter>
+        <a-entity gltf-exporter></a-entity>
+        <a-assets>
+
+            <!-- Butiks inventar -->
+            <a-asset-item id="bakeoff_model" src="assets/bakeoff_skab.gltf"></a-asset-item>
+            <a-asset-item id="small_shelf" src="assets/small_shelf.gltf"></a-asset-item>
+            <a-asset-item id="large_shelf" src="assets/large_shelf.gltf"></a-asset-item>
+            <a-asset-item id="big_shelf" src="assets/big_shelf.gltf"></a-asset-item>
+            <a-asset-item id="freezer" src="assets/freezer.gltf"></a-asset-item>
+            <a-asset-item id="small_freezer" src="assets/small_freezer.gltf"></a-asset-item>
+            <a-asset-item id="walls" src="assets/walls.gltf"></a-asset-item>
+            <a-asset-item id="roof" src="assets/roof.gltf"></a-asset-item>
+            <a-asset-item id="entrance" src="assets/entrance.gltf"></a-asset-item>
+            <a-asset-item id="fruit_island" src="assets/fruit_island.gltf"></a-asset-item>
+            <a-asset-item id="meat_box" src="assets/meat_box.gltf"></a-asset-item>
+            <a-asset-item id="cooler" src="assets/cooler.gltf"></a-asset-item>
+            <a-asset-item id="diary_and_eggs" src="assets/diary_and_eggs.gltf"></a-asset-item>
+            <a-asset-item id="candy_and_snacks" src="assets/candy_and_snacks.gltf"></a-asset-item>
+            <a-asset-item id="self_service_register" src="assets/self_service_register.gltf"></a-asset-item>
+
+            <!-- Varer -->
+
+        </a-assets>
+
+        <!-- #region Old Camera -->
+        <!-- <a-entity id="cameraRig" position="-11 2 16.5">
+            <a-entity id="head" camera wasd-controls look-controls user-height="2" rotation="0 -90 0">
+                <a-cursor color="red" fuse="true" fuseTimeout="1500" maxDistance="30" />
+            </a-entity>
+            <a-entity id="left-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;" gearvr-controls></a-entity>
+            <a-entity id="right-hand" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;" gearvr-controls></a-entity>
+        </a-entity>
+
+        <a-entity id="cameraRig" position="-11 2 21">
+            <a-entity id="head" camera look-controls wasd-controls body="type: static; mass: 5; shape: sphere;">
+                <a-entity position="0 0 -3" geometry="primitive: ring; radiusInner: 0.05; radiusOuter: 0.07;" material="color: red; shader: flat"
+                    cursor="maxDistance: 15; fuse: true">
+                </a-entity>
+            </a-entity>
+        </a-entity> -->
+
+        <!-- #endregion -->
+
+        <a-entity id="rig" movement-controls position="-11 1.8 21">
+            <a-entity id="camera" camera position="0 1.8 0" shape: sphere; look-controls="pointerLockEnabled: true">
+            </a-entity>
+        </a-entity>
+
+
+        <!-- #region Himlen, have og lys -->
+        <a-sky id="The Sky" color="#add8e6" geometry=""></a-sky>
+        <a-plane static-body="sphereRadius:NaN" width="30" position="0 0.01 0" height="30" rotation="-90 0 0" geometry="height:31.8" position="0 0 0.8998282614486417"></a-plane>
+        <a-plane width="100" height="100" rotation="-90 0 0" static-body="mass: 9999" position="0 0 0" color="lime"></a-plane>
+
+        <!--Lys-->
+        <a-entity light="intensity:0.6;castShadow:true" position="12.49073075572284 4.500811208049429 -12.430845045592315" data-aframe-default-light="" aframe-injected=""></a-entity>
+        <!-- #endregion -->
+        
+        <!-- #region Taget-->
+        <a-gltf-model static-body id="roof" src="#roof"></a-gltf-model>
+        <!-- #endregion -->
+        <!-- #region Vægge og Entré Parti -->
+        <a-gltf-model static-body id="walls" src="#walls"></a-gltf-model>
+        
+        <!-- #region Indgang -->
+        <a-gltf-model static-body src="#entrance"></a-gltf-model>
+        <!-- endregion -->
+
+
+        <!-- #region Bakeoff -->
+        <a-gltf-model static-body id="bakeoff" src="#bakeoff_model"></a-gltf-model>
+        <!-- endregion -->
+
+
+        <!-- #region Marmelade/Chokolade-->
+        <a-gltf-model id="marmalde_and_chokolate" src="#small_shelf"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Øko Grønt-->
+        <a-gltf-model id="organic_vege" src="#large_shelf"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Alm Grønt-->
+        <a-gltf-model id="vegetable_shelf" static-body position="-18.773384328805058 0 0" rotation="0 -90 0" src="#large_shelf"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Frugt Ø-->
+        <a-gltf-model static-body id="fruit_island" src="#fruit_island"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Slagter Køl-->
+        <a-gltf-model static-body id="meat_box" src="#meat_box"></a-gltf-model>
+        <!-- endregion -->
+
+
+        <!-- #region Konserves-->
+        <a-gltf-model id="canned_goods_shelf" static-body src="#small_shelf" position="-6.877 0 0" rotation="0 -90 0" scale="1 1.2 1"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Køl-->
+        <a-gltf-model static-body id="cooler" src="#cooler"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Spot Fryser-->
+        <a-gltf-model id="spot_freezer1" src="#small_freezer" position="-1.742 0 -12.868127556680653" scale="0.82 1 0.5" rotation="0 90 0"></a-gltf-model>
+        <a-gltf-model id="spot_freezer2" src="#small_freezer" position="9.065632649561833 0 -12.868127556680653" scale="0.8200000000000001 1 0.5" rotation="0 90 0"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Fryser-->
+        <a-gltf-model id="freezer_area" src="#freezer" position="16.264098304864245 0 -6.049" scale="1.7 1 1.13"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Mejeri/Æg/osv.-->
+        <a-gltf-model static-body id="diary_and_eggs" src="#diary_and_eggs"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Pasta/Ris/Andet kolonial-->
+        <a-gltf-model id="pasta_rice_other" src="#big_shelf" position="-1.492 0 -14.178799419029051" gltf-model="assets/big_shelf.gltf" scale="0.75 1 1"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Drikkevarer-->
+        <a-gltf-model id="drinks" src="#big_shelf" position="9.718734723811725 0 15.773813376626403" rotation="0 180 0" gltf-model="assets/big_shelf.gltf" scale="0.75 1 1"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Vin & Spiritus-->
+        <a-gltf-model id="vin_og_spiritus" src="#big_shelf" position="-0.008067213105741544 0 10.75035055463159" rotation="0 90 0" gltf-model="assets/big_shelf.gltf" scale="0.7 1 1"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Diverse nonfood ting (husholdning)-->
+        <a-gltf-model id="diverse_nonfood_stuff" src="#big_shelf" position="-1.492 0 -7.243907012226542" gltf-model="assets/big_shelf.gltf" scale="0.75 1 1"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Baby stuff og personlig pleje-->
+        <a-gltf-model id="baby_stuff_and_personel_care_shelf" src="#big_shelf" position="9.718734723811725 0 22.699096033522476" rotation="0 180 0" gltf-model="assets/big_shelf.gltf" scale="0.75 1 1"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Slik og Snacks-->
+        <a-gltf-model static-body id="candy_and_snacks" src="#candy_and_snacks"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Krydderier/mel/køkken-->
+        <a-gltf-model id="spices_flour_and_kitchen" src="#small_shelf" position="-3.1467727255285585 -0.0068279998165956535 -7.034527198479602" rotation="0 90 0" gltf-model="assets/small_shelf.gltf"></a-gltf-model>
+        <!-- endregion -->
+
+        <!-- #region Selvbetjenings Kasse-->
+        <a-gltf-model static-body idD="self_service_register" src="#self_service_register"></a-gltf-model>
+        <!-- endregion -->
+    </a-scene>
+</body>
+</html>
