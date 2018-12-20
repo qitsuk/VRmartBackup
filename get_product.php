@@ -2,8 +2,8 @@
 include_once 'db_factory.php';
 
 if (isset($_GET['data'])) {
-    $productID = $_GET['data'];
-    $q1 = "SELECT * FROM Produkter WHERE p_id=$productID";
+    $productID = mysql_real_escape_string($_GET['data']);
+    $q1 = "SELECT p_navn, p_pris, p_beskrivelse FROM Produkter WHERE p_id=$productID";
 } else {
     echo "Error, please try again.";
 }
